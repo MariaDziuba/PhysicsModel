@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="icon" href="favicon.ico"/>
+<head>
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <title>Модель движения шарика в зависимости от вязкости среды</title>
+</head>
+
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    })
+</script>
+
+<script src="script.js"></script>
+<body>
+
+
+<div class="header">
+    Модель движения шара в зависимости от вязкости среды
+</div>
+<img src="picture.jpg" width="200" height="350" alt="picture" class="picture">
+<div class="description">
+    Выполнили студенты группы M3235 университета ИТМО Дзюба Мирия, Карасёва Екатерина, Рындина Валерия.<br/>
+    Модель показывает график движения шара в воде.
+    В зависимости от массы шара (в граммах) и процента концентрации примесей меняются множество значений, которые изменяют силы:<br/>
+    <ul>
+        <li>тяжести шара <b>F = mg</b>,</li>
+        <li>Архимеда <b>F<sub>арх</sub> = mVg</b>,</li>
+        <li>вязкости <b>F<sub>вяз</sub> = 6πRv η</b>,</li>
+        <li>сопротивления волн <b>F<sub>волн</sub> = Ce <sup>-kx</sup>e <sup>-t/ τ</sup>cos(wt)</b>.</li>
+    </ul>
+    <div class="menu">
+        Меню:
+        <ul>
+            <li><a href="#graphic">График</a></li>
+            <li><a href="#solution">Решение</a></li>
+        </ul>
+    </div>
+</div>
+    <div>
+        <div class="full">
+            <br>
+            <div class="controller">
+                <a id="graphic"> </a>
+                <aside>
+                    <section>
+                        <form>
+                            <div class="container-fluid my-2">
+                                <div class="d-flex flex-row">
+                                    <p>Масса шара: <span id="mass-text"/>
+                                    </p>
+                                    <button type="button" class="btn btn-outline-danger ml-2 md-3 btn-sm"
+                                            data-container="body"
+                                            data-toggle="popover" data-placement="top"
+                                            data-content="в мг">
+                                        ?
+                                    </button>
+                                </div>
+                                <input type="range" min="200" max="3000" value="1000" class="slider my-2" id="mass">
+                            </div>
+                            <div class="container-fluid my-2">
+                                <div class="d-flex flex-row">
+                                    <p>Концентрация раствора: <span id="concentration-text"/>
+                                    </p>
+                                    <button type="button" class="btn btn-outline-danger ml-2 md-3 btn-sm"
+                                            data-container="body"
+                                            data-toggle="popover" data-placement="top"
+                                            data-content="в %">
+                                        ?
+                                    </button>
+                                </div>
+                                <input type="range" min="0" max="100" value="60" step="1" class="slider my-2"
+                                       id="concentration">
+
+                            </div>
+
+                            <div class="container-fluid my-2">
+                                <div class="d-flex flex-row">
+                                    <p>Общее время: <span id="max-time-text"/>
+                                    </p>
+                                    <button type="button" class="btn btn-outline-danger ml-2 md-3 btn-sm"
+                                            data-container="body"
+                                            data-toggle="popover" data-placement="top"
+                                            data-content="проведения эксперимента, в сек">
+                                        ?
+                                    </button>
+                                </div>
+                                <input type="range" min="0" max="100" value="30" step="1" class="slider my-2"
+                                       id="max-time">
+                            </div>
+                        </form>
+                    </section>
+                </aside>
+                <main>
+                    <div class="d-flex">
+                        <div class="container" id="canvas-container">
+                            <canvas id="сhart"></canvas>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <div class="arrow-text">
+            <a id="solution"> </a>
+            Решение уравнения:
+        </div>
+        <img src="https://media.giphy.com/media/Qa3v89Lp19hA9BmKTJ/giphy.gif" class="arrow">
+        <div class="pdf">
+            <iframe src="model.pdf" width="50%" height="800"></iframe>
+        </div>
+        <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+    </div>
+<script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+<script>addBackToTop({
+    diameter: 56,
+    backgroundColor: '#dc3545',
+    textColor: '#dc3545'
+})</script>
+</body>
+</html>
+
+

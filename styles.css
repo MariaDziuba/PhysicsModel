@@ -1,0 +1,98 @@
+* {
+    background: rgb(247,246,233);
+    font-family: 'Caveat', cursive;
+}
+
+.arrow-text {
+    font-size: 45px;
+}
+
+.description {
+    font-size: 25px;
+    padding-left: 2rem;
+}
+
+.menu {
+    position: relative;
+    left: 500px;
+    font-size: 30px;
+    border: 10px solid #800000;
+    max-width:250px;
+}
+
+.arrow {
+    float: left;
+    margin-top: 80px;
+    margin-left: 300px;
+    width: 140px;
+    height: 70px;
+}
+.picture {
+    float: right;
+    margin: 20px;
+}
+
+.header {
+    text-align: center;
+    font-size: 55px;
+
+}
+.controller {
+    font-weight:900;
+    font-size: 25px;
+    font-style:italic;
+}
+
+.slide-container {
+    width:40rem;
+}
+
+.slider {
+    border-radius: 25px;
+    -webkit-appearance: none;
+    width: 15rem;
+    height: 20px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.btn {
+    border-radius: 25px;
+    height: 1.5rem;
+    color: #dc3545;
+}
+
+
+aside section {
+    float: right;
+    width: 20rem;
+}
+
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    border-radius: 25px;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #800000;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #800000;
+    cursor: pointer;
+}
+
+.pdf {
+    text-align: right;
+}
